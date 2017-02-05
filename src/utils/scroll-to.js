@@ -10,7 +10,8 @@ import getWindow from 'get-window'
 
 function scrollWrapperElements(element, options) {
   let window = getWindow(element)
-  let elementRect = window.getSelection().getRangeAt(0).cloneRange().getBoundingClientRect()
+  const sel = window.getSelection()
+  let elementRect = sel.getRangeAt(sel.rangeCount - 1).cloneRange().getBoundingClientRect()
   let wrapper = element.parentNode
 
   while (wrapper != window.document.body) {
