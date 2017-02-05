@@ -115,7 +115,7 @@ class Void extends React.Component {
    */
 
   renderSpacer = () => {
-    const { node } = this.props
+    const { node, state } = this.props
     let style
 
     if (node.kind == 'block') {
@@ -137,8 +137,10 @@ class Void extends React.Component {
       style = {
         position: 'relative',
         top: '0px',
-        left: '-9999px',
-        textIndent: '-9999px',
+      }
+      if (state.selection.hasFocusIn(node)) {
+        style.left = '-9999px'
+        style.textIndent = '-9999px'
       }
     }
 
