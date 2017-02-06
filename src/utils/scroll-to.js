@@ -12,6 +12,10 @@ function scrollWrapperElements(element, options) {
   let window = getWindow(element)
   const sel = window.getSelection()
   let elementRect = sel.getRangeAt(sel.rangeCount - 1).cloneRange().getBoundingClientRect()
+  if (elementRect.top === 0 && elementRect.bottom === 0) {
+    return null
+  }
+
   let wrapper = element.parentNode
 
   while (wrapper != window.document.body) {
@@ -62,7 +66,9 @@ function scrollTo(element, options) {
   options = options || {}
   options.margin = options.margin || 0
   let rect = scrollWrapperElements(element, options)
-  scrollWindow(element, options, rect)
+  if (rect) {
+    scrollWindow(element, options, rect)
+  }
 }
 
 export default scrollTo
